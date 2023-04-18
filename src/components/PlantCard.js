@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
-function PlantCard() {
+function PlantCard({ name, image, price }) {
+  // destructure
+  // no need for backend, front end so plant card only
+  const [inStock, setInStock] = useState(true); // state for sold out/ in stock , true for in stock
+
+  function handleChangeInStock() {
+    setInStock((InStock) => !inStock); //"!" will toggle from in stock to out of stock
+  }
+
   return (
     <li className="card">
-      <img src={"https://via.placeholder.com/400"} alt={"plant name"} />
-      <h4>{"plant name"}</h4>
-      <p>Price: {"plant price"}</p>
-      {true ? (
-        <button className="primary">In Stock</button>
+      <img src={image} alt={"plant name"} />
+      <h4>{name}</h4>
+      <p>Price: {price}</p>
+      {inStock ? ( // replace
+        <button onClick={handleChangeInStock} className="primary">
+          In Stock
+        </button>
       ) : (
-        <button>Out of Stock</button>
+        <button onClick={handleChangeInStock}>Out of Stock</button>
       )}
     </li>
   );
